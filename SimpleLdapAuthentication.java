@@ -7,7 +7,10 @@ import javax.naming.directory.InitialDirContext;
 
 public class SimpleLdapAuthentication{
    public static void main(String[] args){
-
+      auth();
+   }//end main
+   
+   public static boolean auth(){
       String username = ""; //zrc6825
       String password = "";
       String base = "ou=People,dc=rit,dc=edu";
@@ -26,12 +29,17 @@ public class SimpleLdapAuthentication{
       try{
          DirContext authContext = new InitialDirContext(environment);
          System.out.println("Hello I authenticated");
+         return true;
          // user is authenticated
       }catch (AuthenticationException ex){
          // Authentication failed
          System.out.println("Error: " + ex.getMessage());
+         return false;
       }catch (NamingException ex){
          ex.printStackTrace();
+         return false;
       }//end try/catch
-   }//end main
+
+   
+   }
 }//end class
